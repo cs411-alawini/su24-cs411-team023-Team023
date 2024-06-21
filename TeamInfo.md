@@ -17,10 +17,11 @@
 
  |   Info      |        Description     |
  | ----------- | ---------------------- |
- |  Title      |       ProjectTitle     |
+ |  Title      |       NutriChoice     |
  | System URL  |      link_to_system    |
  | Video Link  |      link_to_video     |
 
  ## Project Summary
 
- This is a summary of the project!
+NutriChoice is a web application that allows for a user to compile a list of food ingredients to buy at the grocery store by inputting dietary goals and preferences. Rather than taking the extra time to research the number of calories in food items or trying to figure out how to increase your protein intake, this application will do it immediately, saving time. 
+
