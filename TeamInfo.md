@@ -12,8 +12,6 @@
  | Member1     | binkina2@illinois.edu  |
  | Member2     |        Hu Simon        |
  | Member2     |  simonhu2@illinois.edu |
- | Member3     |        Gangmuk Lim     |
- | Member3     |  gangmuk2@illinois.edu |
 
  ## Project Information
 
