@@ -1,13 +1,94 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Ingredient Search</title>
+    <style>
+      body {
+        background-color: white;
+        color: black;
+        font-family: 'MiloPro-Bold', Helvetica, sans-serif;
+        font-size: 18px;
+      }
+
+      .ingredient-search {
+        text-align: center;
+        padding: 2rem;
+        border-bottom: 4px solid #428145; 
+      }
+
+      .ingredient-page-title {
+        font-size: 2rem; 
+      }
+
+      .ingredient-default div {
+        font-size: 1.25rem;
+      }
+
+      .ingredient-search-form input[type='search'] {
+        padding: 0.5rem;
+        width: 80%;
+        max-width: 400px;
+        font-size: 1rem;
+      }
+
+      .ingredient-search-form button {
+        padding: 0.5rem 1rem;
+        background-color: #428145;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem; 
+      }
+
+      .ingredient-search-form button:hover {
+        background-color: #428145;
+      }
+
+      .main-footer {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 1rem; 
+        background-color: #428145; 
+        color: white; 
+        padding: 1rem 0; 
+      }
+    </style>
   </head>
+
   <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <div class="ingredient-search">
+      <h1 class="ingredient-page-title">Search Bar</h1>
+      <div>Search for Ingredients and their Nutrition</div>
+
+      <div class="ingredient-default">
+        <form
+          action="search.html"
+          class="ingredient-search-form"
+          onsubmit="location.href=this.action+'#/?query='+encodeURI(this.query.value); return false;"
+        >
+          <div role="search">
+            <input name="utf8" type="hidden" value="✓" />
+            <input id="affiliate" name="affiliate" type="hidden" value="usda" />
+            <input
+              autocomplete="off"
+              id="header-search"
+              name="query"
+              type="search"
+              placeholder="Search Ingredients..."
+            />
+            <button type="submit">
+              <span class="ingredient-sr-only">Search</span>
+            </button>
+            <input name="commit" type="hidden" value="Search" />
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer id="footer" class="main-footer">
+      <p>&copy; 2024 Team023's Property</p>
+    </footer>
   </body>
 </html>
