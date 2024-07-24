@@ -1,15 +1,20 @@
 import express from 'express';
+import cors from 'cors';
 import connection from './db.js';
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  connection.query('SELECT 1 + 1 AS solution', (err, results) => {
+app.get('/search', (req, res) => {
+  const { query } = req.query;
+  const sqlQuery = 'SELECT * FROM VitMacroData WHERE shrt_desc LIKE ?';
+  connection.query(sqlQuery, [`%${query}%`], (err, results) => {
     if (err) {
       res.status(500).send('Database query error');
       return;
     }
-    res.send(`The solution is: ${results[0].solution}`);
+    res.json(results);
   });
 });
 
