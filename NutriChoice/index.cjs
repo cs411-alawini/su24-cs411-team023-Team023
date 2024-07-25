@@ -4,7 +4,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const db = mysql.createConnection({
-  host: '34.134.234.150',
+  host: '34.133.63.126',
   user: 'root',
   password: 'team1234',
   database: 'NutriChoice'
@@ -36,6 +36,6 @@ app.get('/search', (req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(80, function () {
+  console.log(`Server is running on port 80`);
 });
