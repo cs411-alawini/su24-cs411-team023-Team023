@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
+const path = require('path');
 
 const db = mysql.createConnection({
   host: '34.133.63.126',
@@ -10,18 +11,19 @@ const db = mysql.createConnection({
   database: 'NutriChoice'
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-    return;
-  }
-  console.log('Connected to database.');
-});
+db.connect();
 
-const app = express();
+var app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'app')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app', 'index.html'));
+});
 
 app.get('/search', (req, res) => {
   const { query } = req.query;
@@ -35,7 +37,6 @@ app.get('/search', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(80, function () {
-  console.log(`Server is running on port 80`);
+app.listen(3000, function () {
+  console.log(`Server is running on port 3000`);
 });
