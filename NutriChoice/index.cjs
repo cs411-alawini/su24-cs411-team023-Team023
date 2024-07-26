@@ -11,16 +11,19 @@ const db = mysql.createConnection({
   database: 'NutriChoice'
 });
 
-db.connect;
+db.connect();
 
-var app = express();
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', function(req, res) {
-  res.render('index');
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/search', (req, res) => {
