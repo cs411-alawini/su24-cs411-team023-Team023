@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Ingredient Search Results</title>
+    <style>
+      body {
+        background-color: white; /* White background */
+        color: black;
+        font-family: 'MiloPro-Bold', Helvetica, sans-serif;
+        font-size: 18px; /* Increase base font size */
+      }
+
+      .results-page {
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .results-page h1 {
+        font-size: 2rem; /* Increase title font size */
+      }
+
+      .results-page #results p {
+        font-size: 1.25rem; /* Increase content font size */
+      }
+
+      .sort-options {
+        margin: 1rem 0;
+        text-align: left; /* Align sort options to the left */
+        display: inline-block; /* Keep sort options inline */
+      }
+
+      .sort-options label {
+        display: block; /* Each label on a new line */
+      }
+
+      .back-button {
+        padding: 0.5rem 1rem;
+        background-color: #428145; /* Button background color */
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 1rem;
+        font-size: 1rem; /* Increase button font size */
+      }
+
+      .back-button:hover {
+        background-color: lightgrey;
+      }
+
+      .main-footer {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 1rem; /* Increase footer font size */
+        background-color: #428145; /* Footer background color */
+        color: white; /* Footer text color */
+        padding: 1rem 0; /* Footer padding */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="results-page">
+      <h1>Ingredient Search Results</h1>
+      <div id="results">
+        <!-- This is where search results will be displayed in the future -->
+        <p>No results to display. Please enter a search query.</p>
+      </div>
+
+      <div class="sort-options">
+        <label>
+          <input type="checkbox" id="sort-by-low-cholesterol" name="sort" value="low-cholesterol" />
+          Low Cholesterol
+        </label>
+        <label>
+          <input type="checkbox" id="sort-by-high-protein" name="sort" value="high-protein" />
+          High Protein
+        </label>
+        <label>
+          <input type="checkbox" id="sort-by-high-fiber" name="sort" value="high-fiber" />
+          High Fiber
+        </label>
+        <label>
+          <input type="checkbox" id="sort-by-lactose-free" name="sort" value="lactose-free" />
+          Lactose-Free
+        </label>
+        <label>
+          <input type="checkbox" id="sort-by-low-calories" name="sort" value="low-calories" />
+          Low Calories
+        </label>
+      </div>
+
+      <button class="back-button" onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+      function goBack() {
+        window.location.href = 'index.html';
+      }
+    </script>
+
+    <footer id="footer" class="main-footer">
+      <p>&copy; 2024 Team023's Property</p>
+    </footer>
+  </body>
+</html>

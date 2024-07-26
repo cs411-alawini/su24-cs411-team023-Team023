@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Home</title>
+    <style>
+      body {
+        background-color: white;
+        color: black;
+        font-family: 'MiloPro-Bold', Helvetica, sans-serif;
+        font-size: 18px;
+        margin: 0;
+      }
+
+      .header {
+        position: relative;
+        text-align: center;
+        padding: 2rem;
+        background-color: #428145;
+        color: white;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+        margin: 0;
+      }
+
+      .header .subheader {
+        font-size: 1.25rem;
+        margin-top: 0.5rem;
+      }
+
+      .header-links {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      .sign-in-button {
+        padding: 0.5rem 1rem;
+        background-color: white;
+        color: #428145;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-right: 15px;
+      }
+
+      .sign-in-button:hover {
+        background-color: lightgrey;
+      }
+
+      .list-link img {
+        height: 40px;
+        cursor: pointer;
+      }
+
+      .ingredient-default {
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .ingredient-search-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin-top: 20px;
+      }
+
+      .ingredient-search-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .ingredient-search-form input[type='search'] {
+        padding: 0.5rem;
+        width: 100%;
+        max-width: 400px;
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+
+      .ingredient-search-form button {
+        padding: 0.5rem 1rem;
+        background-color: #428145;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+
+      .ingredient-search-form button:hover {
+        background-color: #306034;
+      }
+
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 20px;
+        padding-left: 60px; /* More space to the right */
+      }
+
+      .checkbox-group label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .checkbox-group input[type='checkbox'] {
+        margin-right: 5px;
+        accent-color: #428145; /* Change checkbox color when checked */
+      }
+
+      .main-footer {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: 1rem;
+        background-color: #428145;
+        color: white;
+        padding: 1rem 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <h1 class="ingredient-page-title">NutriChoice</h1>
+      <div class="subheader">The Best Site for Ingredient Nutrition</div>
+      <div class="header-links">
+        <a href="login.html" class="sign-in-button">Sign In</a>
+        <a href="list.html" class="list-link">
+          <img src="picture/list.jpg" alt="List" />
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="ingredient-default">
+        <h1 class="ingredient-page-title"></h1>
+        <div>Search or Sort Ingredients and their Nutrition</div>
+        <div class="ingredient-search-container">
+          <div class="checkbox-group">
+            <label
+              ><input type="checkbox" name="filters" value="low_cholesterol" />
+              Low Cholesterol</label
+            >
+            <label
+              ><input type="checkbox" name="filters" value="high_protein" />
+              High Protein</label
+            >
+            <label
+              ><input type="checkbox" name="filters" value="high_fiber" /> High
+              Fiber</label
+            >
+            <label
+              ><input type="checkbox" name="filters" value="lactose_free" />
+              Lactose-Free</label
+            >
+            <label
+              ><input type="checkbox" name="filters" value="low_calories" /> Low
+              Calories</label
+            >
+          </div>
+          <form
+            action="search.html"
+            class="ingredient-search-form"
+            onsubmit="location.href=this.action+'#/?query='+encodeURI(this.query.value); return false;"
+          >
+            <div role="search">
+              <input name="utf8" type="hidden" value="✓" />
+              <input
+                id="affiliate"
+                name="affiliate"
+                type="hidden"
+                value="usda"
+              />
+              <input
+                autocomplete="off"
+                id="header-search"
+                name="query"
+                type="search"
+                placeholder="Search Ingredients..."
+              />
+              <button type="submit">
+                <span class="ingredient-sr-only">Search</span>
+              </button>
+              <input name="commit" type="hidden" value="Search" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="main-footer">
+      <p>&copy; 2024 Team023's Property</p>
+    </footer>
+
+  <script>
+    document.getElementById('search-form').addEventListener('submit', async (e) => {
+      e.preventDefault(); // Prevent the default form submission
+
+      const query = document.getElementById('header-search').value;
+      const searchResultsDiv = document.getElementById('search-results');
+
+      try {
+        const response = await fetch(`http://localhost:3000/search?query=${encodeURIComponent(query)}`);
+        const results = await response.json();
+
+        searchResultsDiv.innerHTML = ''; // Clear previous results
+
+        if (results.length > 0) {
+          const ul = document.createElement('ul');
+          results.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item.shrt_desc; // Adjust this to the actual data field you want to display
+            ul.appendChild(li);
+          });
+          searchResultsDiv.appendChild(ul);
+        } else {
+          searchResultsDiv.textContent = 'No results found';
+        }
+      } catch (error) {
+        searchResultsDiv.textContent = 'Error fetching data';
+        console.error('Error fetching data:', error);
+      }
+    });
+  </script>
+</body>
+</html>
