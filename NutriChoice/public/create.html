@@ -58,7 +58,7 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 60px; /* Space from the header */
+            margin-top: 60px;
         }
 
         .create-container h2 {
@@ -121,7 +121,7 @@
     </div>
     <div class="create-container">
         <h2>Create Account</h2>
-        <form action="/create-account" method="POST">
+        <form id="create-account-form">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required />
 
@@ -146,5 +146,37 @@
             <a href="login.html">Already have an account? Login</a>
         </div>
     </div>
+    <script>
+        document.getElementById('create-account-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+
+            try {
+                const response = await fetch('http://<YOUR_GCP_SERVER_IP>:3000/api/create-account', { //change IP
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password, name, age, height, weight }),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    console.log('Account created successfully', data);
+                    //redirect page
+                } else {
+                    console.error('Failed to create account', data.message);
+                }
+            } catch (error) {
+                console.error('Error connecting to server:', error);
+            }
+        });
+    </script>
 </body>
 </html>
