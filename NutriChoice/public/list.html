@@ -1,111 +1,191 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Ingredient Search Results</title>
+    <title>List</title>
     <style>
-      body {
-        background-color: grey;
-        color: white;
-        font-family: Arial, sans-serif;
-      }
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'MiloPro-Bold', Helvetica, sans-serif;
+            font-size: 18px;
+            margin: 0;
+        }
 
-      .results-page {
-        padding: 2rem;
-      }
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+            background-color: #428145;
+            color: white;
+        }
 
-      .back-button {
-        padding: 0.5rem 1rem;
-        background-color: white;
-        color: grey;
-        border: none;
-        cursor: pointer;
-        margin-top: 1rem;
-      }
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
 
-      .back-button:hover {
-        background-color: lightgrey;
-      }
+        .header .header-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
 
-      .main-footer {
-        margin-top: 2rem;
-        text-align: center;
-      }
+        .header-button {
+            padding: 0.5rem 1rem;
+            background-color: white;
+            color: #428145;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+        }
 
-      .sort-options {
-        margin: 1rem 0;
-      }
+        .header-button:hover {
+            background-color: lightgrey;
+        }
+
+        .content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .dropdown-container {
+            margin-top: 20px;
+        }
+
+        .dropdown-container select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            margin-top: 10px;
+        }
+
+        .input-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .input-container input {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .generate-button {
+            padding: 0.5rem 1rem;
+            background-color: #428145;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .generate-button:hover {
+            background-color: #306034;
+        }
+
+        .main-footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 1rem;
+            background-color: #428145;
+            color: white;
+            padding: 1rem 0;
+        }
     </style>
-  </head>
+</head>
 
-  <body>
-    <div class="results-page">
-      <h1>Ingredient Search Results</h1>
-      <div id="results">
-        <!-- This is where search results will be displayed in the future -->
-        <p>No results to display. Please enter a search query.</p>
-      </div>
+<body>
+    <header class="header">
+        <h1>NutriChoice</h1>
+        <div class="header-buttons">
+            <a href="index.html" class="header-button">Search</a>
+            <a href="login.html" class="header-button">Sign In</a>
+        </div>
+    </header>
 
-      <div class="sort-options">
-        <label>
-          <input
-            type="checkbox"
-            id="sort-by-low-cholesterol"
-            name="sort"
-            value="low-cholesterol"
-          />
-          Low Cholesterol </label
-        ><br />
-        <label>
-          <input
-            type="checkbox"
-            id="sort-by-high-protein"
-            name="sort"
-            value="high-protein"
-          />
-          High Protein </label
-        ><br />
-        <label>
-          <input
-            type="checkbox"
-            id="sort-by-high-fiber"
-            name="sort"
-            value="high-fiber"
-          />
-          High Fiber </label
-        ><br />
-        <label>
-          <input
-            type="checkbox"
-            id="sort-by-lactose-free"
-            name="sort"
-            value="lactose-free"
-          />
-          Lactose-Free </label
-        ><br />
-        <label>
-          <input
-            type="checkbox"
-            id="sort-by-low-calories"
-            name="sort"
-            value="low-calories"
-          />
-          Low Calories
-        </label>
-      </div>
+    <main class="content">
+        <h1>Select Nutrient and Input Values</h1>
+        
+        <div class="dropdown-container">
+            <select name="nutrients" id="nutrient-select">
+                <option value="">Select a nutrient...</option>
+                <option value="water">Water</option>
+                <option value="calories">Calories</option>
+                <option value="protein">Protein</option>
+                <option value="carbohydrates">Carbohydrates</option>
+                <option value="fiber">Fiber</option>
+                <option value="sugar">Sugar</option>
+                <option value="calcium">Calcium</option>
+                <option value="iron">Iron</option>
+                <option value="magnesium">Magnesium</option>
+                <option value="phosphorus">Phosphorus</option>
+                <option value="potassium">Potassium</option>
+                <option value="sodium">Sodium</option>
+                <option value="vitamin_c">Vitamin C</option>
+                <option value="vitamin_b6">Vitamin B6</option>
+                <option value="folate">Folate (Vitamin B9)</option>
+                <option value="choline">Choline (Vitamin B)</option>
+                <option value="vitamin_b12">Vitamin B12</option>
+                <option value="vitamin_a">Vitamin A</option>
+                <option value="vitamin_e">Vitamin E</option>
+                <option value="vitamin_d">Vitamin D</option>
+                <option value="vitamin_k">Vitamin K</option>
+                <option value="saturated_fat">Saturated Fat</option>
+                <option value="mono_fat">Mono Fat</option>
+                <option value="poly_fat">Poly Fat</option>
+                <option value="cholesterol">Cholesterol</option>
+                <option value="zinc">Zinc</option>
+                <option value="copper">Copper</option>
+                <option value="manganese">Manganese</option>
+                <option value="thiamin">Thiamin</option>
+                <option value="riboflavin">Riboflavin</option>
+                <option value="niacin">Niacin</option>
+                <option value="pantothenic_acid">Pantothenic Acid</option>
+                <option value="retinol">Retinol</option>
+                <option value="alpha_carotene">Alpha-Carotene</option>
+                <option value="beta_carotene">Beta-Carotene</option>
+                <option value="beta_cryptoxanthin">Beta-Cryptoxanthin</option>
+                <option value="lycopene">Lycopene</option>
+                <option value="lutein_zeaxanthin">Lutein and Zeaxanthin</option>
+            </select>
+        </div>
 
-      <button class="back-button" onclick="goBack()">Go Back</button>
-    </div>
+        <div class="input-container">
+            <label for="goal-amount">Enter a goal amount (g, mg, ug, RAE, etc):</label>
+            <input type="text" id="goal-amount" name="goal-amount" placeholder="e.g., 100g, 200mg">
+        </div>
 
-    <script>
-      function goBack() {
-        window.location.href = 'index.html';
-      }
-    </script>
+        <div class="input-container">
+            <label for="current-amount">Enter current amount:</label>
+            <input type="text" id="current-amount" name="current-amount" placeholder="e.g., 50g, 100mg">
+        </div>
 
-    <footer id="footer" class="main-footer">
-      <p>&copy; 2024 Team023's Property</p>
+        <div>
+            <button class="generate-button">Generate</button>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2024 Team023's Property</p>
     </footer>
-  </body>
+</body>
 </html>

@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
 
 app.get('/search', (req, res) => {
   const { query } = req.query;
-  const sqlQuery = 'SELECT * FROM VitMacroData WHERE shrt_desc LIKE ?';
+  const sqlQuery = 'SELECT * FROM FoodItems WHERE FoodName LIKE ?';
   db.query(sqlQuery, [`%${query}%`], (err, results) => {
     if (err) {
       res.status(500).send('Database query error');
@@ -40,7 +40,7 @@ app.get('/search', (req, res) => {
 app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
-  const sqlQuery = 'SELECT * FROM users WHERE email = ? AND password = ?'; //change
+  const sqlQuery = 'SELECT * FROM UserInfo WHERE Email = ? AND Password = ?'; //change
   db.query(sqlQuery, [email, password], (err, results) => {
     if (err) {
       res.status(500).send({ error: 'Database query error' });
