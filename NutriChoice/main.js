@@ -10,12 +10,12 @@ document.getElementById('create-account-form').addEventListener('submit', async 
   const weight = document.getElementById('Weight').value;
 
   try {
-    const response = await fetch('http://<YOUR_GCP_SERVER_IP>:3000/api/create-account', { //replace with server IP
+    const response = await fetch('http://34.133.63.126:3000/api/create-account', { //replace with server IP
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password, name, age, height, weight }),
+      body: JSON.stringify({email, password, name, age, height, weight}),
     });
 
     const data = await response.json();
@@ -42,7 +42,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
 
 async function loginUser(Email, Password) {
   try {
-    const response = await fetch('http://<YOUR_GCP_SERVER_IP>:3000/api/login', { //change to server IP
+    const response = await fetch('http://34.133.63.126:3000/api/login', { //change to server IP
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
