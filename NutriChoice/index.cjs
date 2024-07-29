@@ -19,7 +19,6 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
@@ -35,6 +34,23 @@ app.get('/search', (req, res) => {
       return;
     }
     res.json(results);
+  });
+});
+
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
+
+  const sqlQuery = 'SELECT * FROM users WHERE email = ? AND password = ?'; //change
+  db.query(sqlQuery, [email, password], (err, results) => {
+    if (err) {
+      res.status(500).send({ error: 'Database query error' });
+      return;
+    }
+    if (results.length > 0) {
+      res.status(200).send({ message: 'Login successful', user: results[0] });
+    } else {
+      res.status(401).send({ message: 'Invalid credentials' });
+    }
   });
 });
 
