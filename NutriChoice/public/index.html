@@ -141,38 +141,6 @@
     <footer id="footer" class="main-footer">
         <p>&copy; 2024 Team023's Property</p>
     </footer>
-
-    <script>
-        document.getElementById('search-form').addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent the default form submission
-
-            const query = document.getElementById('header-search').value;
-            const searchResultsDiv = document.getElementById('search-results');
-
-            try {
-                const response = await fetch(`http://localhost:3000/search?query=${encodeURIComponent(query)}`);
-                const results = await response.json();
-
-                searchResultsDiv.innerHTML = ''; //Clear previous results
-
-                if (results.length > 0) {
-                    const ul = document.createElement('ul');
-                    results.forEach(item => {
-                        const li = document.createElement('li');
-                        li.textContent = item.FoodName; //Adjust this field name to match your database
-                        ul.appendChild(li);
-                    });
-                    searchResultsDiv.appendChild(ul);
-                } else {
-                    searchResultsDiv.textContent = 'No results found';
-                }
-            } catch (error) {
-                searchResultsDiv.textContent = 'Error fetching data';
-                console.error('Error fetching data:', error);
-            }
-        });
-    </script>
 </body>
 </html>
-
 

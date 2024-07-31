@@ -1,6 +1,6 @@
 //for creating accounts
 document.getElementById('create-account-form').addEventListener('submit', async (event) => {
-  event.preventDefault(); // Prevent the default form submission
+  event.preventDefault();
 
   const email = document.getElementById('Email').value;
   const password = document.getElementById('Password').value;
@@ -10,7 +10,7 @@ document.getElementById('create-account-form').addEventListener('submit', async 
   const weight = document.getElementById('Weight').value;
 
   try {
-    const response = await fetch('http://34.133.63.126:3000/api/create-account', { //replace with server IP
+    const response = await fetch('http://35.229.74.255:3001/api/create-account', { //replace with server IP
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
 
 async function loginUser(Email, Password) {
   try {
-    const response = await fetch('http://34.133.63.126:3000/api/login', { //change to server IP
+    const response = await fetch('http://35.229.74.255:3001/api/login', { //change to server IP
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

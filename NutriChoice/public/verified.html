@@ -150,7 +150,7 @@
             const searchResultsDiv = document.getElementById('search-results');
 
             try {
-                const response = await fetch(`http://localhost:3000/search?query=${encodeURIComponent(query)}`);
+                const response = await fetch(`http://localhost:3001/search?query=${encodeURIComponent(query)}`);
                 const results = await response.json();
 
                 searchResultsDiv.innerHTML = ''; //Clear previous results

@@ -114,7 +114,7 @@
         #result {
             margin-top: 20px;
             font-size: 1rem;
-            color: red; /* Use a color that stands out */
+            color: red; 
         }
     </style>
 </head>
@@ -139,13 +139,13 @@
     </div>
     <script>
         document.getElementById('forgot-password-form').addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault();
 
             const email = document.getElementById('email').value;
             const resultDiv = document.getElementById('result');
 
             try {
-                const response = await fetch('http://<YOUR_GCP_SERVER_IP>:3000/api/recover-password', { // Replace <YOUR_GCP_SERVER_IP> with your actual server IP
+                const response = await fetch('https://35.229.74.255:3001/api/recover-password', { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
