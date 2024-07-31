@@ -5,10 +5,10 @@ const cors = require('cors');
 const path = require('path');
 
 const db = mysql.createConnection({
-  host: '34.133.63.126',
+  host: '35.229.74.255',
   user: 'root',
   password: 'test1234',
-  database: 'nutrichoice'
+  database: 'nutrichoicefinal'
 });
 
 db.connect();
@@ -21,6 +21,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const allowedOrigins = ['http://localhost:3001', 'http://35.229.74.255'];
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -29,7 +48,7 @@ app.get('/', (req, res) => {
 app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
-  const sqlQuery = 'SELECT * FROM UserInfo WHERE Email = ? AND Password = ?'; //change
+  const sqlQuery = 'SELECT * FROM UserInfo WHERE UserId = email AND Password = password'; //change
   db.query(sqlQuery, [email, password], (err, results) => {
     if (err) {
       res.status(500).send({ error: 'Database query error' });
@@ -47,8 +66,8 @@ app.post('/api/login', (req, res) => {
 app.post('/api/create-account', (req, res) => {
   const { email, password, name, age, height, weight } = req.body;
 
-  const sqlQuery = 'INSERT INTO UserInfo (Email, Password, Name, Age, Height, Weight) VALUES (?, ?, ?, ?, ?, ?)';
-  db.query(sqlQuery, [email, password, name, age, height, weight], (err, result) => {
+  const sqlQuery = 'INSERT INTO UserInfo (UserId, Customer_Name, Height, Weight, Age, Password) VALUES (?, ?, ?, ?, ?, ?)';
+  db.query(sqlQuery, [email, name, height, weight, age, password], (err, result) => {
     if (err) {
       res.status(500).send({ error: 'Database error' });
       return;
@@ -75,6 +94,6 @@ app.post('/api/recover-password', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log(`Server is running on port 3000`);
+app.listen(3001, () => {
+  console.log(`Server is running on port 3001`);
 });
